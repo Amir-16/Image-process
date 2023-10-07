@@ -4,30 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImageRequest;
 use App\Services\ConvertWebp;
+use App\Traits\ResponseTrait;
 use Exception;
 
 class ImageProcessController extends Controller
 {
 
+    use ResponseTrait;
     public function processImage(ImageRequest $request)
     {
-
         try {
             $img = $request->file('file');
-            //called service class statically
+            // service class for img convert
             ConvertWebp::imageConverter($img);
 
-            return response()->json([
-                'status' => 1,
-                'success' => 'Image Processed successfully.']
-                , 200);
+            return $this->successMsg(1, 'Image Coneverted successfully');
 
         } catch (Exception $e) {
 
-            return response()->json([
-                'status' => 0,
-                'message' => $e->getMessage(),
-            ]);
+            return $this->errorMsg(0, $e->getMessage());
+
         }
 
     }

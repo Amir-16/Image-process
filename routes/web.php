@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ImageProcessController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/{any}', function () {
     return view('welcome');
 })->where('any','.*');
-
-Route::controller(ImageProcessController::class)->group( function(){
-    Route::post('upload', 'processImage')->name('process-image');
-});
 
 

@@ -45,7 +45,7 @@
                 }
                 let data = new FormData();
                 data.append('file', this.file);
-                axios.post('/upload', data, config)
+                axios.post('api/upload', data, config)
                     .then(function (res) {
                         existingObj.success  = res.data.success;
                         document.getElementById('imageFile').value = "";
